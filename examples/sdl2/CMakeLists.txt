@@ -137,6 +137,16 @@ SET(CPACK_PACKAGE_ICON meta/icon.ico)
 SET(CPACK_PACKAGE_EXECUTABLES peanut-sdl;Peanut-SDL)
 INCLUDE(CPack)
 
+IF(PSP)
+    create_pbp_file(
+        TARGET ${PROJECT_NAME}
+        ICON_PATH NULL
+        BACKGROUND_PATH NULL
+        PREVIEW_PATH NULL
+        TITLE ${PROJECT_NAME}
+    )
+ENDIF()
+
 MESSAGE(STATUS "Peanut-SDL ${peanut-sdl_VERSION} (git: ${GIT_VER}) will build with the following options:")
 MESSAGE(STATUS "  CC:      ${CMAKE_C_COMPILER} '${CMAKE_C_COMPILER_ID}' on '${CMAKE_SYSTEM_NAME}'")
 MESSAGE(STATUS "  CFLAGS:  ${CMAKE_C_FLAGS}")

@@ -620,7 +620,6 @@ int main(int argc, char **argv)
 	SDL_LogSetPriority(LOG_CATERGORY_PEANUTSDL, SDL_LOG_PRIORITY_INFO);
 
 	/* Enable Hi-DPI to stop blurry game image. */
-	SDL_SetHint(SDL_HINT_WINDOWS_DPI_AWARENESS, "permonitorv2");
 
 	/* Initialise frontend implementation, in this case, SDL2. */
 	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER | SDL_INIT_AUDIO) < 0)
@@ -636,8 +635,8 @@ int main(int argc, char **argv)
 	window = SDL_CreateWindow("Peanut-SDL: Opening File",
 			SDL_WINDOWPOS_CENTERED,
 			SDL_WINDOWPOS_CENTERED,
-			LCD_WIDTH * 2, LCD_HEIGHT * 2,
-			SDL_WINDOW_RESIZABLE | SDL_WINDOW_INPUT_FOCUS);
+			LCD_WIDTH, LCD_HEIGHT,
+			SDL_WINDOW_SHOWN);
 
 	if(window == NULL)
 	{
@@ -933,7 +932,7 @@ int main(int argc, char **argv)
 
 	SDL_SetWindowMinimumSize(window, LCD_WIDTH, LCD_HEIGHT);
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(renderer == NULL)
 	{
 		SDL_LogMessage(LOG_CATERGORY_PEANUTSDL,
